@@ -5,6 +5,7 @@ import com.amary.my.music.core.coroutine.coroutinesModule
 import com.amary.my.music.core.network.networkModule
 import com.amary.my.music.data.di.musicDataModule
 import com.amary.my.music.domain.di.musicDomainModule
+import com.amary.my.music.feature.musicFeatureModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -20,7 +21,8 @@ class MainApplication: Application() {
                 coroutinesModule,
                 networkModule,
                 musicDataModule,
-                musicDomainModule
+                musicDomainModule,
+                musicFeatureModule
             )
         }
     }
