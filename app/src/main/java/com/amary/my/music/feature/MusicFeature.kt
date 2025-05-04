@@ -19,13 +19,13 @@ fun MusicFeature(viewModel: MusicViewModel) {
             viewModel.searchMusic(it)
         },
         onPrepare = {
-//            viewModel.prePare(it.previewUrl)
+            viewModel.prePare(it.previewUrl)
         },
         onSeekTo = {
-//            viewModel.seekTo(it)
+            viewModel.seekTo(it)
         },
         onPlay = {
-//            viewModel.playPause()
+            viewModel.playPause()
         }
     )
 }

@@ -22,6 +22,7 @@ kt_android_library(
         "@maven//:androidx_compose_runtime_runtime",
         "@maven//:androidx_compose_ui_ui",
         "@maven//:androidx_compose_ui_ui_tooling",
+        "@maven//:androidx_media3_media3_exoplayer",
     ],
 )
 

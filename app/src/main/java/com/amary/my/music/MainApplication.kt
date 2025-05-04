@@ -2,6 +2,7 @@ package com.amary.my.music
 
 import android.app.Application
 import com.amary.my.music.core.coroutine.coroutinesModule
+import com.amary.my.music.core.exoplayer.exoPlayerModule
 import com.amary.my.music.core.network.networkModule
 import com.amary.my.music.data.di.musicDataModule
 import com.amary.my.music.domain.di.musicDomainModule
@@ -20,6 +21,7 @@ class MainApplication: Application() {
             modules(
                 coroutinesModule,
                 networkModule,
+                exoPlayerModule,
                 musicDataModule,
                 musicDomainModule,
                 musicFeatureModule

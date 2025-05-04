@@ -47,7 +47,10 @@ maven_install(
         "com.squareup.retrofit2:retrofit:2.11.0",
         "com.squareup.retrofit2:converter-gson:2.11.0",
         "com.google.code.gson:gson:2.10.1",
-        "com.squareup.okhttp3:okhttp:4.12.0"
+        "com.squareup.okhttp3:okhttp:4.12.0",
+        # ExoPlayer
+        "androidx.media3:media3-exoplayer:1.3.1",
+        "androidx.media3:media3-ui:1.3.1"
     ],
     repositories = [
         "https://maven.google.com",
