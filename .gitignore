@@ -1,0 +1,16 @@
+*~
+bazel-*
+.idea
+# Eclipse
+.project
+.classpath
+.settings/
+# Maven
+target/
+# Xcode
+*.xcodeproj
+node_modules
+# Bazel lockfile
+*MODULE.bazel.lock
+# VScode
+/.vscode/
