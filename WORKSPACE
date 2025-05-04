@@ -39,10 +39,20 @@ maven_install(
         "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1",
         "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1",
         "androidx.lifecycle:lifecycle-viewmodel:2.5.1",
+        # Koin
+        "io.insert-koin:koin-core:3.3.3",
+        "io.insert-koin:koin-android:3.3.3",
+        "io.insert-koin:koin-core-jvm:3.3.3",
+        # Retrofit & Serialize Json
+        "com.squareup.retrofit2:retrofit:2.11.0",
+        "com.squareup.retrofit2:converter-gson:2.11.0",
+        "com.google.code.gson:gson:2.10.1",
+        "com.squareup.okhttp3:okhttp:4.12.0"
     ],
     repositories = [
         "https://maven.google.com",
         "https://repo1.maven.org/maven2",
+        "https://repo.maven.apache.org/maven2",
     ],
 )
 

@@ -3,12 +3,18 @@ load("@rules_kotlin//kotlin:android.bzl", "kt_android_library")
 
 kt_android_library(
     name = "lib",
-    srcs = ["java/com/amary/my/music/MainActivity.kt"],
+    srcs = glob(["java/**/*.kt"]),
     custom_package = "com.amary.my.music",
     manifest = "LibraryManifest.xml",
     plugins = ["//:jetpack_compose_compiler_plugin"],
     resource_files = glob(["res/**/*"]),
     deps = [
+        "@maven//:io_insert_koin_koin_core",
+        "@maven//:io_insert_koin_koin_core_jvm",
+        "@maven//:io_insert_koin_koin_android",
+        "@maven//:com_squareup_retrofit2_retrofit",
+        "@maven//:com_squareup_retrofit2_converter_gson",
+        "@maven//:com_google_code_gson_gson",
         "@maven//:androidx_activity_activity_compose",
         "@maven//:androidx_appcompat_appcompat",
         "@maven//:androidx_compose_foundation_foundation",
