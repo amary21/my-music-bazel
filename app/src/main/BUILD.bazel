@@ -1,5 +1,6 @@
 load("@build_bazel_rules_android//android:rules.bzl", "android_binary")
 load("@rules_kotlin//kotlin:android.bzl", "kt_android_library")
+load("@rules_jvm_external//:defs.bzl", "artifact")
 
 kt_android_library(
     name = "lib",
@@ -9,20 +10,20 @@ kt_android_library(
     plugins = ["//:jetpack_compose_compiler_plugin"],
     resource_files = glob(["res/**/*"]),
     deps = [
-        "@maven//:io_insert_koin_koin_core",
-        "@maven//:io_insert_koin_koin_core_jvm",
-        "@maven//:io_insert_koin_koin_android",
-        "@maven//:com_squareup_retrofit2_retrofit",
-        "@maven//:com_squareup_retrofit2_converter_gson",
-        "@maven//:com_google_code_gson_gson",
-        "@maven//:androidx_activity_activity_compose",
-        "@maven//:androidx_appcompat_appcompat",
-        "@maven//:androidx_compose_foundation_foundation",
-        "@maven//:androidx_compose_foundation_foundation_layout",
-        "@maven//:androidx_compose_runtime_runtime",
-        "@maven//:androidx_compose_ui_ui",
-        "@maven//:androidx_compose_ui_ui_tooling",
-        "@maven//:androidx_media3_media3_exoplayer",
+        artifact("io.insert-koin:koin-core"),
+        artifact("io.insert-koin:koin-core-jvm"),
+        artifact("io.insert-koin:koin-android"),
+        artifact("com.squareup.retrofit2:retrofit"),
+        artifact("com.squareup.retrofit2:converter-gson"),
+        artifact("com.google.code.gson:gson"),
+        artifact("androidx.activity:activity-compose"),
+        artifact("androidx.appcompat:appcompat"),
+        artifact("androidx.compose.foundation:foundation"),
+        artifact("androidx.compose.foundation:foundation-layout"),
+        artifact("androidx.compose.runtime:runtime"),
+        artifact("androidx.compose.ui:ui"),
+        artifact("androidx.compose.ui:ui-tooling"),
+        artifact("androidx.media3:media3-exoplayer"),
     ],
 )
 

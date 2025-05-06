@@ -22,56 +22,6 @@ load("@rules_jvm_external//:setup.bzl", "rules_jvm_external_setup")
 
 rules_jvm_external_setup()
 
-
-load("@rules_jvm_external//:defs.bzl", "maven_install")
-
-maven_install(
-    name = "maven",
-    version_conflict_policy = "pinned",
-    artifacts = [
-        "androidx.appcompat:appcompat:1.5.1",
-        # Jetpack Compose Dependencies
-        "androidx.activity:activity-compose:1.6.0",
-        "androidx.compose.material:material:1.2.1",
-        "androidx.compose.ui:ui:1.2.1",
-        "androidx.compose.ui:ui-tooling:1.2.1",
-        "androidx.compose.compiler:compiler:1.5.8",
-        "androidx.compose.runtime:runtime:1.2.1",
-        # Dependencies needed to manage version conflicts
-        "androidx.core:core:1.12.0",
-        "androidx.core:core-ktx:1.12.0",
-        "androidx.savedstate:savedstate-ktx:1.2.0",
-        "androidx.savedstate:savedstate:1.2.0",
-        "androidx.lifecycle:lifecycle-livedata-core-ktx:2.5.1",
-        "androidx.lifecycle:lifecycle-livedata-core:2.5.1",
-        "androidx.lifecycle:lifecycle-livedata:2.5.1",
-        "androidx.lifecycle:lifecycle-process:2.5.1",
-        "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1",
-        "androidx.lifecycle:lifecycle-runtime:2.5.1",
-        "androidx.lifecycle:lifecycle-service:2.5.1",
-        "androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1",
-        "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.1",
-        "androidx.lifecycle:lifecycle-viewmodel:2.5.1",
-        # Koin
-        "io.insert-koin:koin-core:3.3.3",
-        "io.insert-koin:koin-android:3.3.3",
-        "io.insert-koin:koin-core-jvm:3.3.3",
-        # Retrofit & Serialize Json
-        "com.squareup.retrofit2:retrofit:2.11.0",
-        "com.squareup.retrofit2:converter-gson:2.11.0",
-        "com.google.code.gson:gson:2.10.1",
-        "com.squareup.okhttp3:okhttp:4.12.0",
-        # ExoPlayer
-        "androidx.media3:media3-exoplayer:1.3.1",
-        "androidx.media3:media3-ui:1.3.1"
-    ],
-    repositories = [
-        "https://maven.google.com",
-        "https://repo1.maven.org/maven2",
-        "https://repo.maven.apache.org/maven2",
-    ],
-)
-
 ## Android
 
 http_archive(
