@@ -18,19 +18,3 @@ android_sdk_repository(
     name = "androidsdk",
     path = "/Users/amary/Library/Android/sdk",  # Sesuaikan dengan lokasi SDK kamu
 )
-
-## Kotlin
-
-http_archive(
-    name = "rules_kotlin",
-    sha256 = "d9898c3250e0442436eeabde4e194c30d6c76a4a97f517b18cefdfd4e345725a",
-    url = "https://github.com/bazelbuild/rules_kotlin/releases/download/v1.9.1/rules_kotlin-v1.9.1.tar.gz",
-)
-
-load("@rules_kotlin//kotlin:repositories.bzl", "kotlin_repositories", "kotlinc_version")
-
-kotlin_repositories()
-
-load("@rules_kotlin//kotlin:core.bzl", "kt_register_toolchains")
-
-kt_register_toolchains()
