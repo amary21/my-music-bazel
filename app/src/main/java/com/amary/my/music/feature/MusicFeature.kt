@@ -4,9 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun MusicFeature(viewModel: MusicViewModel) {
+fun MusicFeature() {
+    val viewModel: MusicViewModel = koinViewModel()
     val state by viewModel.state.collectAsState()
 
     LaunchedEffect(Unit) {

@@ -13,6 +13,7 @@ kt_android_library(
         artifact("io.insert-koin:koin-core"),
         artifact("io.insert-koin:koin-core-jvm"),
         artifact("io.insert-koin:koin-android"),
+        artifact("io.insert-koin:koin-androidx-compose"),
         artifact("com.squareup.retrofit2:retrofit"),
         artifact("com.squareup.retrofit2:converter-gson"),
         artifact("com.google.code.gson:gson"),
@@ -23,6 +24,7 @@ kt_android_library(
         artifact("androidx.compose.runtime:runtime"),
         artifact("androidx.compose.ui:ui"),
         artifact("androidx.compose.ui:ui-tooling"),
+        artifact("androidx.compose.ui:ui-tooling-preview"),
         artifact("androidx.media3:media3-exoplayer"),
     ],
 )
