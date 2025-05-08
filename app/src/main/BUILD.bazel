@@ -1,6 +1,6 @@
 load("@rules_android//android:rules.bzl", "android_binary")
-load("@rules_kotlin//kotlin:android.bzl", "kt_android_library")
 load("@rules_jvm_external//:defs.bzl", "artifact")
+load("@rules_kotlin//kotlin:android.bzl", "kt_android_library")
 
 kt_android_library(
     name = "lib",
@@ -25,7 +25,9 @@ kt_android_library(
         artifact("androidx.compose.ui:ui"),
         artifact("androidx.compose.ui:ui-tooling"),
         artifact("androidx.compose.ui:ui-tooling-preview"),
+        artifact("androidx.lifecycle:lifecycle-viewmodel-ktx"),
         artifact("androidx.media3:media3-exoplayer"),
+        artifact("io.coil-kt:coil-compose"),
     ],
 )
 
