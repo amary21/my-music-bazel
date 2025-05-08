@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
+import com.amary.my.music.data.api.model.Result
 import com.amary.my.music.domain.api.MusicUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -51,8 +52,8 @@ class MusicViewModel(
         }
     }
 
-    fun prePare(url: String) {
-        exoPlayer.setMediaItem(MediaItem.fromUri(url))
+    fun prePare(result: Result) {
+        exoPlayer.setMediaItem(MediaItem.fromUri(result.previewUrl))
         exoPlayer.prepare()
 
         exoPlayer.addListener(object : Player.Listener{
@@ -60,7 +61,8 @@ class MusicViewModel(
                 super.onIsPlayingChanged(isPlaying)
                 _state.update {
                     it.copy(
-                        isPlaying = isPlaying
+                        isPlaying = isPlaying,
+                        selectedSong = result
                     )
                 }
             }

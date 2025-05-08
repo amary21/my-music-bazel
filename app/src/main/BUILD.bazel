@@ -25,6 +25,8 @@ kt_android_library(
         artifact("androidx.compose.ui:ui"),
         artifact("androidx.compose.ui:ui-tooling"),
         artifact("androidx.compose.ui:ui-tooling-preview"),
+        artifact("androidx.compose.material:material"),
+        artifact("androidx.compose.material:material-icons-core"),
         artifact("androidx.lifecycle:lifecycle-viewmodel-ktx"),
         artifact("androidx.media3:media3-exoplayer"),
         artifact("io.coil-kt:coil-compose"),

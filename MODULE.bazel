@@ -14,6 +14,7 @@ maven.install(
         "androidx.appcompat:appcompat:1.5.1",
         "androidx.activity:activity-compose:1.6.0",
         "androidx.compose.material:material:1.2.1",
+        "androidx.compose.material:material-icons-core:1.2.1",
         "androidx.compose.ui:ui:1.2.1",
         "androidx.compose.ui:ui-tooling:1.2.1",
         "androidx.compose.ui:ui-tooling-preview:1.2.1",

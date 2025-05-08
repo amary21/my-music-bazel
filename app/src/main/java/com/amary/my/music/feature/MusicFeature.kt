@@ -11,17 +11,13 @@ fun MusicFeature() {
     val viewModel: MusicViewModel = koinViewModel()
     val state by viewModel.state.collectAsState()
 
-    LaunchedEffect(Unit) {
-        viewModel.searchMusic("APT")
-    }
-
     MusicScreen(
         state = state,
         onSearch = {
             viewModel.searchMusic(it)
         },
         onPrepare = {
-            viewModel.prePare(it.previewUrl)
+            viewModel.prePare(it)
         },
         onSeekTo = {
             viewModel.seekTo(it)

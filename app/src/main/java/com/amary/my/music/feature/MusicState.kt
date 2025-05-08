@@ -9,5 +9,6 @@ data class MusicState(
     val message: String = "",
     val isPlaying: Boolean = false,
     val position: Long = 0,
-    val duration: Long = 0
+    val duration: Long = 0,
+    val selectedSong: Result? = null
 )
