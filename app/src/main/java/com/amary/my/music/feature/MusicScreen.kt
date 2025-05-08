@@ -12,17 +12,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
+import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Slider
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -45,6 +45,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.amary.my.music.data.api.model.Result
 import com.amary.my.music.ui.icon.Icons
+import com.amary.my.music.ui.icon.Pause
+import com.amary.my.music.ui.icon.Play
 import com.amary.my.music.ui.icon.Search
 
 @Composable
@@ -110,6 +112,63 @@ fun MusicScreen(
                 )
             }
         },
+        bottomBar = {
+            AnimatedVisibility(visible = state.selectedSong != null) {
+                Card(
+                    backgroundColor = Color(0xFF6156E2),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp),
+                    elevation = 8.dp,
+                    shape = RoundedCornerShape(8.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                    ) {
+                        AsyncImage(
+                            modifier = Modifier
+                                .height(50.dp)
+                                .width(50.dp)
+                                .clip(RoundedCornerShape(8.dp))
+                                .background(Color.DarkGray),
+                            model = state.selectedSong?.artworkUrl100,
+                            contentDescription = "",
+                            contentScale = ContentScale.Crop
+                        )
+                        Column(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(horizontal = 8.dp),
+                        ) {
+                            Text(
+                                text = state.selectedSong?.trackName.orEmpty(),
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                maxLines = 1
+                            )
+                            Text(
+                                text = state.selectedSong?.artistName.orEmpty(),
+                                color = Color.White,
+                                fontWeight = FontWeight.Light
+                            )
+                        }
+
+                        IconButton(onClick = onPlay) {
+                            Icon(
+                                modifier = Modifier.size(25.dp),
+                                imageVector = if (state.isPlaying)
+                                    Icons.Pause
+                                else
+                                    Icons.Play,
+                                contentDescription = null,
+                                tint = Color.White
+                            )
+                        }
+                    }
+                }
+            }
+        }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -149,7 +208,7 @@ fun MusicScreen(
                             modifier = Modifier
                                 .height(150.dp)
                                 .clickable {
-                                    if (!state.isPlaying) {
+                                    if (result != state.selectedSong) {
                                         onPrepare(result)
                                     }
 
@@ -175,7 +234,8 @@ fun MusicScreen(
                                     else
                                         Color.White,
                                     fontWeight = FontWeight.Bold,
-                                    style = TextStyle(fontSize = 17.sp)
+                                    style = TextStyle(fontSize = 17.sp),
+                                    maxLines = 2
                                 )
                                 Spacer(modifier = Modifier.height(8.dp))
                                 Text(
