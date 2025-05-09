@@ -51,6 +51,8 @@ fun MusicBottomSheet(
     onBack: () -> Unit = {},
     onSeekTo: (Long) -> Unit = {},
     onPlay: () -> Unit = {},
+    onPrevious: () -> Unit = {},
+    onNext: () -> Unit = {},
 ) {
     ModalBottomSheetLayout(sheetState = sheetState, sheetContent = {
         Scaffold(
@@ -168,7 +170,7 @@ fun MusicBottomSheet(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     IconButton(
-                        onClick = {  }
+                        onClick = onPrevious
                     ) {
                         Icon(
                             modifier = Modifier.size(40.dp),
@@ -197,7 +199,7 @@ fun MusicBottomSheet(
                         )
                     }
                     IconButton(
-                        onClick = {  }
+                        onClick = onNext
                     ) {
                         Icon(
                             modifier = Modifier.size(40.dp),

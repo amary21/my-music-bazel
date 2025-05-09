@@ -108,6 +108,29 @@ class MusicViewModel(
         exoPlayer.seekTo(position)
     }
 
+    fun next() {
+        val current = _state.value.selectedSong
+        val results = _state.value.results
+        val currentIndex = results.indexOfFirst { it.trackId == current?.trackId }
+
+        if (currentIndex != -1 && currentIndex < results.lastIndex) {
+            val nextSong = results[currentIndex + 1]
+            prePare(nextSong)
+        }
+    }
+
+    fun prev() {
+        val current = _state.value.selectedSong
+        val results = _state.value.results
+        val currentIndex = results.indexOfFirst { it.trackId == current?.trackId }
+
+        if (currentIndex > 0) {
+            val prevSong = results[currentIndex - 1]
+            prePare(prevSong)
+        }
+    }
+
+
     override fun onCleared() {
         exoPlayer.release()
         positionJob?.cancel()

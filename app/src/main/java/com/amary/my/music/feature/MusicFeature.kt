@@ -51,6 +51,12 @@ fun MusicFeature() {
         },
         onPlay = {
             viewModel.playPause()
+        },
+        onPrevious = {
+            viewModel.prev()
+        },
+        onNext = {
+            viewModel.next()
         }
     )
 }
