@@ -23,6 +23,8 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Slider
+import androidx.compose.material.SliderDefaults
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
@@ -122,49 +124,71 @@ fun MusicScreen(
                     elevation = 8.dp,
                     shape = RoundedCornerShape(8.dp)
                 ) {
-                    Row(
-                        modifier = Modifier.padding(8.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween,
+                    Column(
+                        modifier = Modifier.fillMaxWidth()
                     ) {
-                        AsyncImage(
-                            modifier = Modifier
-                                .height(50.dp)
-                                .width(50.dp)
-                                .clip(RoundedCornerShape(8.dp))
-                                .background(Color.DarkGray),
-                            model = state.selectedSong?.artworkUrl100,
-                            contentDescription = "",
-                            contentScale = ContentScale.Crop
-                        )
-                        Column(
-                            modifier = Modifier
-                                .weight(1f)
-                                .padding(horizontal = 8.dp),
+                        Row(
+                            modifier = Modifier.padding(
+                                top = 8.dp,
+                                start = 8.dp,
+                                end = 8.dp
+                            ),
+                            horizontalArrangement = Arrangement.SpaceBetween,
                         ) {
-                            Text(
-                                text = state.selectedSong?.trackName.orEmpty(),
-                                color = Color.White,
-                                fontWeight = FontWeight.Bold,
-                                maxLines = 1
+                            AsyncImage(
+                                modifier = Modifier
+                                    .height(50.dp)
+                                    .width(50.dp)
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(Color.DarkGray),
+                                model = state.selectedSong?.artworkUrl100,
+                                contentDescription = "",
+                                contentScale = ContentScale.Crop
                             )
-                            Text(
-                                text = state.selectedSong?.artistName.orEmpty(),
-                                color = Color.White,
-                                fontWeight = FontWeight.Light
-                            )
+                            Column(
+                                modifier = Modifier
+                                    .weight(1f)
+                                    .padding(horizontal = 8.dp),
+                            ) {
+                                Text(
+                                    text = state.selectedSong?.trackName.orEmpty(),
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Bold,
+                                    maxLines = 1
+                                )
+                                Text(
+                                    text = state.selectedSong?.artistName.orEmpty(),
+                                    color = Color.White,
+                                    fontWeight = FontWeight.Light
+                                )
+                            }
+
+                            IconButton(onClick = onPlay) {
+                                Icon(
+                                    modifier = Modifier.size(25.dp),
+                                    imageVector = if (state.isPlaying)
+                                        Icons.Pause
+                                    else
+                                        Icons.Play,
+                                    contentDescription = null,
+                                    tint = Color.White
+                                )
+                            }
                         }
 
-                        IconButton(onClick = onPlay) {
-                            Icon(
-                                modifier = Modifier.size(25.dp),
-                                imageVector = if (state.isPlaying)
-                                    Icons.Pause
-                                else
-                                    Icons.Play,
-                                contentDescription = null,
-                                tint = Color.White
+                        Slider(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 8.dp),
+                            value = state.position.toFloat(),
+                            onValueChange = { onSeekTo(it.toLong()) },
+                            valueRange = 0f..(state.duration.toFloat()),
+                            colors = SliderDefaults.colors(
+                                thumbColor = Color.White,
+                                activeTrackColor = Color.White,
+                                inactiveTrackColor = Color.White.copy(alpha = 0.3f)
                             )
-                        }
+                        )
                     }
                 }
             }

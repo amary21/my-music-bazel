@@ -7,6 +7,8 @@ import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.amary.my.music.data.api.model.Result
 import com.amary.my.music.domain.api.MusicUseCase
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -16,6 +18,7 @@ class MusicViewModel(
     private val musicUseCase: MusicUseCase,
     private val exoPlayer: ExoPlayer
 ): ViewModel() {
+    private var positionJob: Job? = null
     private val _state = MutableStateFlow(MusicState())
     val state get() = _state.asStateFlow()
 
@@ -58,7 +61,6 @@ class MusicViewModel(
 
         exoPlayer.addListener(object : Player.Listener{
             override fun onIsPlayingChanged(isPlaying: Boolean) {
-                super.onIsPlayingChanged(isPlaying)
                 _state.update {
                     it.copy(
                         isPlaying = isPlaying,
@@ -68,15 +70,30 @@ class MusicViewModel(
             }
 
             override fun onPlaybackStateChanged(playbackState: Int) {
-                super.onPlaybackStateChanged(playbackState)
-                _state.update {
-                    it.copy(
-                        duration = exoPlayer.duration,
-                        position = exoPlayer.currentPosition
-                    )
+                if (playbackState == Player.STATE_READY) {
+                    _state.update {
+                        it.copy(
+                            duration = exoPlayer.duration
+                        )
+                    }
                 }
             }
         })
+
+        startPositionUpdate()
+    }
+
+    private fun startPositionUpdate() {
+        positionJob = viewModelScope.launch {
+            while (true) {
+                _state.update {
+                    it.copy(
+                        position = exoPlayer.currentPosition
+                    )
+                }
+                delay(500)
+            }
+        }
     }
 
     fun playPause() {
@@ -93,6 +110,7 @@ class MusicViewModel(
 
     override fun onCleared() {
         exoPlayer.release()
+        positionJob?.cancel()
         super.onCleared()
     }
 }
