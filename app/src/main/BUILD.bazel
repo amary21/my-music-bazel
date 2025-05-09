@@ -22,6 +22,7 @@ kt_android_library(
         artifact("androidx.compose.foundation:foundation"),
         artifact("androidx.compose.foundation:foundation-layout"),
         artifact("androidx.compose.runtime:runtime"),
+        artifact("androidx.compose.animation:animation-core"),
         artifact("androidx.compose.ui:ui"),
         artifact("androidx.compose.ui:ui-tooling"),
         artifact("androidx.compose.ui:ui-tooling-preview"),

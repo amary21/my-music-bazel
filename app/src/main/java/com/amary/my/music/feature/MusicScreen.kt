@@ -19,6 +19,7 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -51,6 +52,7 @@ import com.amary.my.music.ui.icon.Pause
 import com.amary.my.music.ui.icon.Play
 import com.amary.my.music.ui.icon.Search
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MusicScreen(
     state: MusicState,
