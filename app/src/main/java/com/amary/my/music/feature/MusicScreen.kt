@@ -46,7 +46,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
-import com.amary.my.music.data.api.model.Result
 import com.amary.my.music.ui.icon.Icons
 import com.amary.my.music.ui.icon.Pause
 import com.amary.my.music.ui.icon.Play
@@ -56,15 +55,12 @@ import com.amary.my.music.ui.icon.Search
 @Composable
 fun MusicScreen(
     state: MusicState,
-    onSearch: (String) -> Unit,
-    onPrepare: (Result) -> Unit,
-    onSeekTo: (Long) -> Unit,
-    onPlay: () -> Unit,
+    event: (MusicEvent) -> Unit,
 ) {
     val search = remember { mutableStateOf("Linkin Park") }
 
     LaunchedEffect(Unit) {
-        onSearch(search.value)
+        event(MusicEvent.OnSearch(search.value))
     }
 
     Scaffold(
@@ -90,7 +86,7 @@ fun MusicScreen(
                     value = query,
                     onValueChange = {
                         query = it
-                        onSearch(it)
+                        event(MusicEvent.OnSearch(it))
                     },
                     placeholder = {
                         Text("Search Music", color = Color.Gray)
@@ -165,7 +161,9 @@ fun MusicScreen(
                                 )
                             }
 
-                            IconButton(onClick = onPlay) {
+                            IconButton(onClick = {
+                                event(MusicEvent.OnPlayPause)
+                            }) {
                                 Icon(
                                     modifier = Modifier.size(25.dp),
                                     imageVector = if (state.isPlaying)
@@ -183,7 +181,7 @@ fun MusicScreen(
                                 .fillMaxWidth()
                                 .padding(horizontal = 8.dp),
                             value = state.position.toFloat(),
-                            onValueChange = { onSeekTo(it.toLong()) },
+                            onValueChange = { event(MusicEvent.OnSeekTo(it.toLong())) },
                             valueRange = 0f..(state.duration.toFloat()),
                             colors = SliderDefaults.colors(
                                 thumbColor = Color.White,
@@ -235,10 +233,10 @@ fun MusicScreen(
                                 .height(150.dp)
                                 .clickable {
                                     if (result != state.selectedSong) {
-                                        onPrepare(result)
+                                        event(MusicEvent.OnPrepare(result))
                                     }
 
-                                    onPlay()
+                                    event(MusicEvent.OnPlayPause)
                                 }
                         ) {
                             AsyncImage(
@@ -289,9 +287,6 @@ fun MusicScreen(
 fun MusicScreenPreview() {
     MusicScreen(
         state = MusicState(),
-        onSearch = {},
-        onPrepare = {},
-        onSeekTo = {},
-        onPlay = {}
+        event = {}
     )
 }

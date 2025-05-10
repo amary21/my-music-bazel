@@ -4,7 +4,6 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -25,38 +24,29 @@ fun MusicFeature() {
 
     MusicScreen(
         state = state,
-        onSearch = {
-            viewModel.searchMusic(it)
+        event = { uiEvent ->
+            when(uiEvent) {
+                is MusicEvent.OnPrepare -> {
+                    scope.launch { sheetState.show() }
+                    viewModel.onEvent(uiEvent)
+                }
+                else -> viewModel.onEvent(uiEvent)
+            }
+
         },
-        onPrepare = {
-            viewModel.prePare(it)
-            scope.launch { sheetState.show() }
-        },
-        onSeekTo = {
-            viewModel.seekTo(it)
-        },
-        onPlay = {
-            viewModel.playPause()
-        }
     )
 
     MusicBottomSheet(
         state = state,
         sheetState = sheetState,
-        onBack = {
-            scope.launch { sheetState.hide() }
+        event = { uiEvent ->
+            when(uiEvent) {
+                is MusicEvent.OnBack -> {
+                    scope.launch { sheetState.hide() }
+                }
+                else -> viewModel.onEvent(uiEvent)
+            }
+
         },
-        onSeekTo = {
-            viewModel.seekTo(it)
-        },
-        onPlay = {
-            viewModel.playPause()
-        },
-        onPrevious = {
-            viewModel.prev()
-        },
-        onNext = {
-            viewModel.next()
-        }
     )
 }

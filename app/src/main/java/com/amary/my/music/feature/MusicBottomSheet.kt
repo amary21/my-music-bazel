@@ -48,11 +48,7 @@ import com.amary.my.music.ui.util.toMinSec
 fun MusicBottomSheet(
     state: MusicState,
     sheetState: ModalBottomSheetState,
-    onBack: () -> Unit = {},
-    onSeekTo: (Long) -> Unit = {},
-    onPlay: () -> Unit = {},
-    onPrevious: () -> Unit = {},
-    onNext: () -> Unit = {},
+    event: (MusicEvent) -> Unit,
 ) {
     ModalBottomSheetLayout(sheetState = sheetState, sheetContent = {
         Scaffold(
@@ -65,7 +61,7 @@ fun MusicBottomSheet(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     IconButton(
-                        onClick = onBack
+                        onClick = { event(MusicEvent.OnBack) }
                     ) {
                         Icon(
                             Icons.Back,
@@ -132,7 +128,7 @@ fun MusicBottomSheet(
                             end = 8.dp,
                         ),
                     value = state.position.toFloat(),
-                    onValueChange = { onSeekTo(it.toLong()) },
+                    onValueChange = { event(MusicEvent.OnSeekTo(it.toLong())) },
                     valueRange = 0f..(state.duration.toFloat()),
                     colors = SliderDefaults.colors(
                         thumbColor = Color(0xFF6156E2),
@@ -170,7 +166,7 @@ fun MusicBottomSheet(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     IconButton(
-                        onClick = onPrevious
+                        onClick = { event(MusicEvent.OnPrevious) }
                     ) {
                         Icon(
                             modifier = Modifier.size(40.dp),
@@ -180,7 +176,7 @@ fun MusicBottomSheet(
                         )
                     }
                     Button(
-                        onClick = onPlay,
+                        onClick = { event(MusicEvent.OnPlayPause) },
                         shape = CircleShape,
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = Color(0xFF6156E2)
@@ -199,7 +195,7 @@ fun MusicBottomSheet(
                         )
                     }
                     IconButton(
-                        onClick = onNext
+                        onClick = { event(MusicEvent.OnNext) }
                     ) {
                         Icon(
                             modifier = Modifier.size(40.dp),

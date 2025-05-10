@@ -22,7 +22,19 @@ class MusicViewModel(
     private val _state = MutableStateFlow(MusicState())
     val state get() = _state.asStateFlow()
 
-    fun searchMusic(query: String)= viewModelScope.launch {
+    fun onEvent(event: MusicEvent) {
+        when (event) {
+            is MusicEvent.OnBack -> Unit
+            is MusicEvent.OnSearch -> searchMusic(event.query)
+            is MusicEvent.OnPrepare -> prePare(event.result)
+            is MusicEvent.OnSeekTo -> seekTo(event.position)
+            is MusicEvent.OnPlayPause -> playPause()
+            is MusicEvent.OnNext -> next()
+            is MusicEvent.OnPrevious -> prev()
+        }
+    }
+
+    private fun searchMusic(query: String)= viewModelScope.launch {
         try {
             _state.update {
                 it.copy(
@@ -55,7 +67,7 @@ class MusicViewModel(
         }
     }
 
-    fun prePare(result: Result) {
+    private fun prePare(result: Result) {
         exoPlayer.setMediaItem(MediaItem.fromUri(result.previewUrl))
         exoPlayer.prepare()
 
@@ -96,7 +108,7 @@ class MusicViewModel(
         }
     }
 
-    fun playPause() {
+    private fun playPause() {
         if (exoPlayer.isPlaying) {
             exoPlayer.pause()
         } else {
@@ -108,7 +120,7 @@ class MusicViewModel(
         exoPlayer.seekTo(position)
     }
 
-    fun next() {
+    private fun next() {
         val current = _state.value.selectedSong
         val results = _state.value.results
         val currentIndex = results.indexOfFirst { it.trackId == current?.trackId }
@@ -119,7 +131,7 @@ class MusicViewModel(
         }
     }
 
-    fun prev() {
+    private fun prev() {
         val current = _state.value.selectedSong
         val results = _state.value.results
         val currentIndex = results.indexOfFirst { it.trackId == current?.trackId }
