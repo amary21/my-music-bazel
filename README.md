@@ -2,6 +2,11 @@
 
 A modern Android music player application built with Jetpack Compose and Bazel build system. This app demonstrates the implementation of a clean architecture approach with MVVM pattern.
 
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/039de7bf-2d60-4f57-b54d-b5af6272c5b8" width="250"/>
+  <img src="https://github.com/user-attachments/assets/8d959c32-182d-4992-92b6-1f7ace5f174a" width="250"/>
+</p>
+
 ## Features
 
 - Music search functionality
