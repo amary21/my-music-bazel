@@ -37,19 +37,43 @@ The application follows a clean architecture approach with the following modules
 ## Setup Requirements
 
 - Android Studio Arctic Fox or newer
-- Bazel build system
-- Android SDK 21 or higher
-- JDK 11 or higher
+- Bazel 7.x or newer
+- Android SDK 34 or higher
+- Android Build Tools 34.0.0
+- JDK 17 or higher
+- ADB (Android Debug Bridge)
 
 ## Build Instructions
 
 1. Clone the repository
 2. Install Bazel (if not already installed)
-3. Launch an Android emulator or connect a physical device
-4. Run the following command to build and install the app:
+3. Configure Android SDK path in `WORKSPACE.bzlmod` if different from default:
+   ```python
+   android_sdk_repository(
+       name = "androidsdk",
+       path = "/Users/macbookpro/Library/Android/sdk",  # Update this path
+       api_level = 34,
+       build_tools_version = "34.0.0",
+   )
    ```
-   bazel mobile-install //app/src/main:app --start_app
+4. Launch an Android emulator or connect a physical device
+5. Build and install the app:
+
+   **Option 1: Using the install script (Recommended)**
+   ```bash
+   ./install.sh
    ```
+
+   **Option 2: Manual build and install**
+   ```bash
+   bazel build //app/src/main:app
+   adb install -r bazel-bin/app/src/main/app.apk
+   adb shell am start -n com.amary.my.music/.MainActivity
+   ```
+
+### Note on mobile-install
+
+Due to compatibility issues between Bazel 7.x and rules_android 0.1.1, the `bazel mobile-install` command is currently not working. Use the `install.sh` script or manual build/install commands instead.
 
 ## Development
 
