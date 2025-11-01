@@ -4,5 +4,5 @@ load("@rules_android//android:rules.bzl", "android_sdk_repository")
 
 android_sdk_repository(
     name = "androidsdk",
-    path = "/Users/amary/Library/Android/sdk",  # Adjust to your SDK location
+    path = "/Users/macbookpro/Library/Android/sdk",  # Adjust to your SDK location
 )
