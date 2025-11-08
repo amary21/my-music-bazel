@@ -1,4 +1,4 @@
-package com.amary.my.music.core.coroutine
+package com.amary.my.music.coroutine
 
 enum class CoroutineQualifier {
     IoDispatcher,

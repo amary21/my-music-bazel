@@ -1,6 +1,6 @@
 package com.amary.my.music.feature
 
-import com.amary.my.music.data.api.model.Result
+import com.amary.my.music.domain.model.Result
 
 sealed class MusicEvent {
     data object OnBack : MusicEvent()

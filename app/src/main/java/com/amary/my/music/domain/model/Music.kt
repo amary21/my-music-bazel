@@ -1,4 +1,4 @@
-package com.amary.my.music.data.api.model
+package com.amary.my.music.domain.model
 
 data class Music(
     val resultCount: Int = 0,

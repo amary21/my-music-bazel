@@ -1,4 +1,4 @@
-package com.amary.my.music.core.network
+package com.amary.my.music.di
 
 import okhttp3.OkHttpClient
 import org.koin.dsl.module

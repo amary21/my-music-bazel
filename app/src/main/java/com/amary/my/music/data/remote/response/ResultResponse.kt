@@ -1,8 +1,8 @@
-package com.amary.my.music.data.implementation.remote.response
+package com.amary.my.music.data.remote.response
 
 
 import com.google.gson.annotations.SerializedName
-import com.amary.my.music.data.api.model.Result
+import com.amary.my.music.domain.model.Result
 
 data class ResultResponse(
     @SerializedName("artistId")

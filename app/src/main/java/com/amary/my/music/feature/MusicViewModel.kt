@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
-import com.amary.my.music.data.api.model.Result
-import com.amary.my.music.domain.api.MusicUseCase
+import com.amary.my.music.domain.model.Result
+import com.amary.my.music.domain.usecase.MusicUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

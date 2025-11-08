@@ -1,4 +1,4 @@
-package com.amary.my.music.core.coroutine
+package com.amary.my.music.coroutine
 
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.qualifier.named

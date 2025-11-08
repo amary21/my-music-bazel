@@ -1,4 +1,4 @@
-package com.amary.my.music.core.exoplayer
+package com.amary.my.music.di
 
 import androidx.media3.exoplayer.ExoPlayer
 import org.koin.android.ext.koin.androidApplication

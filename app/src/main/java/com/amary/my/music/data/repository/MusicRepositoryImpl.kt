@@ -1,8 +1,8 @@
-package com.amary.my.music.data.implementation.repository
+package com.amary.my.music.data.repository
 
-import com.amary.my.music.data.api.model.Result
-import com.amary.my.music.data.api.repository.MusicRepository
-import com.amary.my.music.data.implementation.remote.api.MusicApi
+import com.amary.my.music.domain.model.Result
+import com.amary.my.music.domain.repository.MusicRepository
+import com.amary.my.music.data.remote.api.MusicApi
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 

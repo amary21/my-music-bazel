@@ -1,12 +1,12 @@
 package com.amary.my.music
 
 import android.app.Application
-import com.amary.my.music.core.coroutine.coroutinesModule
-import com.amary.my.music.core.exoplayer.exoPlayerModule
-import com.amary.my.music.core.network.networkModule
-import com.amary.my.music.data.di.musicDataModule
-import com.amary.my.music.domain.di.musicDomainModule
-import com.amary.my.music.feature.musicFeatureModule
+import com.amary.my.music.coroutine.coroutinesModule
+import com.amary.my.music.di.exoPlayerModule
+import com.amary.my.music.di.networkModule
+import com.amary.my.music.di.dataModule
+import com.amary.my.music.di.domainModule
+import com.amary.my.music.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -22,9 +22,9 @@ class MainApplication: Application() {
                 coroutinesModule,
                 networkModule,
                 exoPlayerModule,
-                musicDataModule,
-                musicDomainModule,
-                musicFeatureModule
+                dataModule,
+                domainModule,
+                viewModelModule
             )
         }
     }
