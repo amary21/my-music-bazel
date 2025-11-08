@@ -1,5 +1,8 @@
 package com.amary.my.music.domain.model
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Result(
     val artistId: Int = 0,
     val artistName: String = "",

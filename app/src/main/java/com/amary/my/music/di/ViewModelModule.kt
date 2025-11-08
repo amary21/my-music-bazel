@@ -1,9 +1,11 @@
 package com.amary.my.music.di
 
-import com.amary.my.music.feature.MusicViewModel
+import com.amary.my.music.feature.detail.DetailViewModel
+import com.amary.my.music.feature.list.ListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    viewModel{ MusicViewModel(get(), get()) }
+    viewModel{ ListViewModel(get(), get()) }
+    viewModel{ DetailViewModel(get()) }
 }

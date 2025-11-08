@@ -1,4 +1,4 @@
-package com.amary.my.music.feature
+package com.amary.my.music.feature.detail
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -35,6 +35,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.amary.my.music.feature.list.ListEvent
+import com.amary.my.music.feature.list.ListState
 import com.amary.my.music.ui.icon.Back
 import com.amary.my.music.ui.icon.Icons
 import com.amary.my.music.ui.icon.Next
@@ -45,10 +47,10 @@ import com.amary.my.music.ui.util.toMinSec
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MusicBottomSheet(
-    state: MusicState,
+fun DetailBottomSheet(
+    state: ListState,
     sheetState: ModalBottomSheetState,
-    event: (MusicEvent) -> Unit,
+    event: (ListEvent) -> Unit,
 ) {
     ModalBottomSheetLayout(sheetState = sheetState, sheetContent = {
         Scaffold(
@@ -61,7 +63,7 @@ fun MusicBottomSheet(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     IconButton(
-                        onClick = { event(MusicEvent.OnBack) }
+                        onClick = { event(ListEvent.OnBack) }
                     ) {
                         Icon(
                             Icons.Back,
@@ -128,7 +130,7 @@ fun MusicBottomSheet(
                             end = 8.dp,
                         ),
                     value = state.position.toFloat(),
-                    onValueChange = { event(MusicEvent.OnSeekTo(it.toLong())) },
+                    onValueChange = { event(ListEvent.OnSeekTo(it.toLong())) },
                     valueRange = 0f..(state.duration.toFloat()),
                     colors = SliderDefaults.colors(
                         thumbColor = Color(0xFF6156E2),
@@ -166,7 +168,7 @@ fun MusicBottomSheet(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     IconButton(
-                        onClick = { event(MusicEvent.OnPrevious) }
+                        onClick = { event(ListEvent.OnPrevious) }
                     ) {
                         Icon(
                             modifier = Modifier.size(40.dp),
@@ -176,7 +178,7 @@ fun MusicBottomSheet(
                         )
                     }
                     Button(
-                        onClick = { event(MusicEvent.OnPlayPause) },
+                        onClick = { event(ListEvent.OnPlayPause) },
                         shape = CircleShape,
                         colors = ButtonDefaults.buttonColors(
                             backgroundColor = Color(0xFF6156E2)
@@ -195,7 +197,7 @@ fun MusicBottomSheet(
                         )
                     }
                     IconButton(
-                        onClick = { event(MusicEvent.OnNext) }
+                        onClick = { event(ListEvent.OnNext) }
                     ) {
                         Icon(
                             modifier = Modifier.size(40.dp),

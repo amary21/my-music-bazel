@@ -1,9 +1,11 @@
 package com.amary.my.music.di
 
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import java.util.concurrent.TimeUnit
 
 val networkModule = module {
@@ -15,9 +17,13 @@ val networkModule = module {
             .build()
     }
     single {
+        val networkJson = Json { ignoreUnknownKeys = true }
         Retrofit.Builder()
             .baseUrl("https://itunes.apple.com/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(
+                networkJson
+                    .asConverterFactory("application/json".toMediaType())
+            )
             .client(get())
             .build()
     }

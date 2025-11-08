@@ -1,87 +1,88 @@
 package com.amary.my.music.data.remote.response
 
-
-import com.google.gson.annotations.SerializedName
 import com.amary.my.music.domain.model.Result
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ResultResponse(
-    @SerializedName("artistId")
+    @SerialName("artistId")
     val artistId: Int? = null,
-    @SerializedName("artistName")
+    @SerialName("artistName")
     val artistName: String? = null,
-    @SerializedName("artistViewUrl")
+    @SerialName("artistViewUrl")
     val artistViewUrl: String? = null,
-    @SerializedName("artworkUrl100")
+    @SerialName("artworkUrl100")
     val artworkUrl100: String? = null,
-    @SerializedName("artworkUrl30")
+    @SerialName("artworkUrl30")
     val artworkUrl30: String? = null,
-    @SerializedName("artworkUrl60")
+    @SerialName("artworkUrl60")
     val artworkUrl60: String? = null,
-    @SerializedName("collectionArtistId")
+    @SerialName("collectionArtistId")
     val collectionArtistId: Int? = null,
-    @SerializedName("collectionArtistName")
+    @SerialName("collectionArtistName")
     val collectionArtistName: String? = null,
-    @SerializedName("collectionCensoredName")
+    @SerialName("collectionCensoredName")
     val collectionCensoredName: String? = null,
-    @SerializedName("collectionExplicitness")
+    @SerialName("collectionExplicitness")
     val collectionExplicitness: String? = null,
-    @SerializedName("collectionHdPrice")
+    @SerialName("collectionHdPrice")
     val collectionHdPrice: Double? = null,
-    @SerializedName("collectionId")
+    @SerialName("collectionId")
     val collectionId: Int? = null,
-    @SerializedName("collectionName")
+    @SerialName("collectionName")
     val collectionName: String? = null,
-    @SerializedName("collectionPrice")
+    @SerialName("collectionPrice")
     val collectionPrice: Double? = null,
-    @SerializedName("collectionViewUrl")
+    @SerialName("collectionViewUrl")
     val collectionViewUrl: String? = null,
-    @SerializedName("contentAdvisoryRating")
+    @SerialName("contentAdvisoryRating")
     val contentAdvisoryRating: String? = null,
-    @SerializedName("country")
+    @SerialName("country")
     val country: String? = null,
-    @SerializedName("currency")
+    @SerialName("currency")
     val currency: String? = null,
-    @SerializedName("discCount")
+    @SerialName("discCount")
     val discCount: Int? = null,
-    @SerializedName("discNumber")
+    @SerialName("discNumber")
     val discNumber: Int? = null,
-    @SerializedName("isStreamable")
+    @SerialName("isStreamable")
     val isStreamable: Boolean? = null,
-    @SerializedName("kind")
+    @SerialName("kind")
     val kind: String? = null,
-    @SerializedName("longDescription")
+    @SerialName("longDescription")
     val longDescription: String? = null,
-    @SerializedName("previewUrl")
+    @SerialName("previewUrl")
     val previewUrl: String? = null,
-    @SerializedName("primaryGenreName")
+    @SerialName("primaryGenreName")
     val primaryGenreName: String? = null,
-    @SerializedName("releaseDate")
+    @SerialName("releaseDate")
     val releaseDate: String? = null,
-    @SerializedName("trackCensoredName")
+    @SerialName("trackCensoredName")
     val trackCensoredName: String? = null,
-    @SerializedName("trackCount")
+    @SerialName("trackCount")
     val trackCount: Int? = null,
-    @SerializedName("trackExplicitness")
+    @SerialName("trackExplicitness")
     val trackExplicitness: String? = null,
-    @SerializedName("trackHdPrice")
+    @SerialName("trackHdPrice")
     val trackHdPrice: Double? = null,
-    @SerializedName("trackHdRentalPrice")
+    @SerialName("trackHdRentalPrice")
     val trackHdRentalPrice: Double? = null,
-    @SerializedName("trackId")
+    @SerialName("trackId")
     val trackId: Int? = null,
-    @SerializedName("trackName")
+    @SerialName("trackName")
     val trackName: String? = null,
-    @SerializedName("trackNumber")
+    @SerialName("trackNumber")
     val trackNumber: Int? = null,
-    @SerializedName("trackPrice")
+    @SerialName("trackPrice")
     val trackPrice: Double? = null,
-    @SerializedName("trackRentalPrice")
+    @SerialName("trackRentalPrice")
     val trackRentalPrice: Double? = null,
-    @SerializedName("trackTimeMillis")
+    @SerialName("trackTimeMillis")
     val trackTimeMillis: Int? = null,
-    @SerializedName("trackViewUrl")
+    @SerialName("trackViewUrl")
     val trackViewUrl: String? = null,
-    @SerializedName("wrapperType")
+    @SerialName("wrapperType")
     val wrapperType: String? = null
 ) {
     fun map(): Result {

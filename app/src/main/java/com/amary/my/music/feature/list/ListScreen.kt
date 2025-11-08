@@ -1,40 +1,14 @@
-package com.amary.my.music.feature
+package com.amary.my.music.feature.list
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Slider
-import androidx.compose.material.SliderDefaults
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -53,14 +27,14 @@ import com.amary.my.music.ui.icon.Search
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MusicScreen(
-    state: MusicState,
-    event: (MusicEvent) -> Unit,
+fun ListScreen(
+    state: ListState,
+    event: (ListEvent) -> Unit,
 ) {
     val search = remember { mutableStateOf("Linkin Park") }
 
     LaunchedEffect(Unit) {
-        event(MusicEvent.OnSearch(search.value))
+        event(ListEvent.OnSearch(search.value))
     }
 
     Scaffold(
@@ -86,7 +60,7 @@ fun MusicScreen(
                     value = query,
                     onValueChange = {
                         query = it
-                        event(MusicEvent.OnSearch(it))
+                        event(ListEvent.OnSearch(it))
                     },
                     placeholder = {
                         Text("Search Music", color = Color.Gray)
@@ -162,7 +136,7 @@ fun MusicScreen(
                             }
 
                             IconButton(onClick = {
-                                event(MusicEvent.OnPlayPause)
+                                event(ListEvent.OnPlayPause)
                             }) {
                                 Icon(
                                     modifier = Modifier.size(25.dp),
@@ -181,7 +155,7 @@ fun MusicScreen(
                                 .fillMaxWidth()
                                 .padding(horizontal = 8.dp),
                             value = state.position.toFloat(),
-                            onValueChange = { event(MusicEvent.OnSeekTo(it.toLong())) },
+                            onValueChange = { event(ListEvent.OnSeekTo(it.toLong())) },
                             valueRange = 0f..(state.duration.toFloat()),
                             colors = SliderDefaults.colors(
                                 thumbColor = Color.White,
@@ -233,10 +207,10 @@ fun MusicScreen(
                                 .height(150.dp)
                                 .clickable {
                                     if (result != state.selectedSong) {
-                                        event(MusicEvent.OnPrepare(result))
+                                        event(ListEvent.OnPrepare(result))
                                     }
 
-                                    event(MusicEvent.OnPlayPause)
+                                    event(ListEvent.OnPlayPause)
                                 }
                         ) {
                             AsyncImage(
@@ -284,9 +258,9 @@ fun MusicScreen(
 
 @Preview
 @Composable
-fun MusicScreenPreview() {
-    MusicScreen(
-        state = MusicState(),
+fun ListScreenPreview() {
+    ListScreen(
+        state = ListState(),
         event = {}
     )
 }

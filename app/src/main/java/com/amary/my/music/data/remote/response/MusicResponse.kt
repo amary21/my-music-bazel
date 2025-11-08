@@ -2,12 +2,14 @@ package com.amary.my.music.data.remote.response
 
 
 import com.amary.my.music.domain.model.Music
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class MusicResponse(
-    @SerializedName("resultCount")
+    @SerialName("resultCount")
     val resultCount: Int? = null,
-    @SerializedName("results")
+    @SerialName("results")
     val results: List<ResultResponse>? = null
 ) {
     fun map(): Music {

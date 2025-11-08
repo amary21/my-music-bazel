@@ -1,4 +1,4 @@
-package com.amary.my.music.feature
+package com.amary.my.music.feature.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,23 +14,23 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MusicViewModel(
+class ListViewModel(
     private val musicUseCase: MusicUseCase,
     private val exoPlayer: ExoPlayer
 ): ViewModel() {
     private var positionJob: Job? = null
-    private val _state = MutableStateFlow(MusicState())
+    private val _state = MutableStateFlow(ListState())
     val state get() = _state.asStateFlow()
 
-    fun onEvent(event: MusicEvent) {
+    fun onEvent(event: ListEvent) {
         when (event) {
-            is MusicEvent.OnBack -> Unit
-            is MusicEvent.OnSearch -> searchMusic(event.query)
-            is MusicEvent.OnPrepare -> prePare(event.result)
-            is MusicEvent.OnSeekTo -> seekTo(event.position)
-            is MusicEvent.OnPlayPause -> playPause()
-            is MusicEvent.OnNext -> next()
-            is MusicEvent.OnPrevious -> prev()
+            is ListEvent.OnBack -> Unit
+            is ListEvent.OnSearch -> searchMusic(event.query)
+            is ListEvent.OnPrepare -> prePare(event.result)
+            is ListEvent.OnSeekTo -> seekTo(event.position)
+            is ListEvent.OnPlayPause -> playPause()
+            is ListEvent.OnNext -> next()
+            is ListEvent.OnPrevious -> prev()
         }
     }
 
