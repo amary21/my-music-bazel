@@ -56,8 +56,9 @@ kt_jvm_test(
     deps = [
         ":lib",
         artifact("junit:junit"),
-        artifact("io.mockk:mockk"),
+        artifact("io.mockk:mockk-jvm"),
         artifact("org.jetbrains.kotlinx:kotlinx-coroutines-test"),
+        artifact("com.squareup.okhttp3:okhttp"),
     ],
 )
 
