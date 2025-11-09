@@ -29,10 +29,6 @@ kt_ksp_plugin(
     visibility = ["//visibility:public"],
     deps = [
         artifact("androidx.room:room-compiler"),
-        artifact("androidx.room:room-runtime"),
-        artifact("androidx.room:room-ktx"),
-        artifact("androidx.sqlite:sqlite-framework"),
-        artifact("androidx.sqlite:sqlite"),
     ],
 )
 
