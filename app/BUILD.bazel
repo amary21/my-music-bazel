@@ -59,6 +59,7 @@ kt_jvm_test(
         artifact("io.mockk:mockk-jvm"),
         artifact("org.jetbrains.kotlinx:kotlinx-coroutines-test"),
         artifact("com.squareup.okhttp3:okhttp"),
+        artifact("app.cash.turbine:turbine-jvm"),
     ],
 )
 

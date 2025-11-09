@@ -122,6 +122,7 @@ maven.install(
         "junit:junit:4.13.2",
         "io.mockk:mockk-jvm:1.13.14",
         "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3",
+        "app.cash.turbine:turbine-jvm:1.2.0"
     ],
     repositories = [
         "https://maven.google.com",
