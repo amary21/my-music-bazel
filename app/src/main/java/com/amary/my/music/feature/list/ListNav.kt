@@ -9,6 +9,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.amary.my.music.feature.detail.DetailBottomSheet
+import com.amary.my.music.feature.detail.DetailRoute
 import kotlinx.coroutines.launch
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -34,14 +35,13 @@ fun NavGraphBuilder.listScreen(navController: NavHostController) {
             event = { uiEvent ->
                 when(uiEvent) {
                     is ListEvent.OnPrepare -> {
-                        scope.launch { sheetState.show() }
-                        viewModel.onEvent(uiEvent)
-//                        navController.navigate(
-//                            DetailRoute(
-//                                results = state.results,
-//                                currentResult = uiEvent.result
-//                            )
-//                        )
+//                        scope.launch { sheetState.show() }
+//                        viewModel.onEvent(uiEvent)
+                        navController.navigate(
+                            DetailRoute(
+                                artistId = uiEvent.result.artistId
+                            )
+                        )
                     }
                     else -> viewModel.onEvent(uiEvent)
                 }

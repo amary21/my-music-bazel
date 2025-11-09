@@ -6,7 +6,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.amary.my.music.domain.model.Result
-import com.amary.my.music.domain.usecase.MusicUseCase
+import com.amary.my.music.domain.usecase.ListMusicUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class ListViewModel(
-    private val musicUseCase: MusicUseCase,
+    private val musicUseCase: ListMusicUseCase,
     private val exoPlayer: ExoPlayer
 ): ViewModel() {
     private var positionJob: Job? = null

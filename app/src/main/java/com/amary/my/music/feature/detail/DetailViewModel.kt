@@ -6,6 +6,8 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.amary.my.music.domain.model.Result
+import com.amary.my.music.domain.usecase.CurrentMusicUseCase
+import com.amary.my.music.domain.usecase.ListMusicUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +16,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class DetailViewModel(
+    private val listMusicUseCase: ListMusicUseCase,
+    private val currentMusicUseCase: CurrentMusicUseCase,
     private val exoPlayer: ExoPlayer
 ): ViewModel() {
     private var positionJob: Job? = null
@@ -23,7 +27,7 @@ class DetailViewModel(
     fun onEvent(event: DetailEvent) {
         when (event) {
             is DetailEvent.OnBack -> Unit
-            is DetailEvent.OnArgument -> setArgument(event.results, event.currentResult)
+            is DetailEvent.OnArgument -> setArgument(event.artistId)
             is DetailEvent.OnSeekTo -> seekTo(event.position)
             is DetailEvent.OnPlayPause -> playPause()
             is DetailEvent.OnNext -> next()
@@ -31,13 +35,19 @@ class DetailViewModel(
         }
     }
 
-    private fun setArgument(results1: List<Result>, currentResult: Result) {
+    private fun setArgument(artistId: Int) = viewModelScope.launch {
+        val results = listMusicUseCase.invoke()
+        val currentResult = currentMusicUseCase.invoke(artistId)
+        currentResult ?: return@launch
+
         _state.update {
             it.copy(
-                results = results1,
+                artistId = artistId,
+                results = results,
                 selectedSong = currentResult
             )
         }
+
         prePare(currentResult)
     }
 

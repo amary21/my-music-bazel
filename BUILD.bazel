@@ -24,10 +24,15 @@ kt_compiler_plugin(
 kt_ksp_plugin(
     name = "room_ksp_plugin",
     processor_class = "androidx.room.RoomProcessor",
+    generates_java = True,
     target_embedded_compiler = True,
     visibility = ["//visibility:public"],
     deps = [
-        artifact("androidx.room:room-compiler")
+        artifact("androidx.room:room-compiler"),
+        artifact("androidx.room:room-runtime"),
+        artifact("androidx.room:room-ktx"),
+        artifact("androidx.sqlite:sqlite-framework"),
+        artifact("androidx.sqlite:sqlite"),
     ],
 )
 

@@ -4,7 +4,7 @@ import com.amary.my.music.domain.repository.MusicRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
-class MusicUseCase(
+class ListMusicUseCase(
     private val musicRepository: MusicRepository,
     private val dispatcher: CoroutineDispatcher,
 ) {
@@ -21,5 +21,9 @@ class MusicUseCase(
             e.printStackTrace()
             musicRepository.getAll()
         }
+    }
+
+    suspend fun invoke() = withContext(dispatcher) {
+        musicRepository.getAll()
     }
 }
