@@ -15,6 +15,7 @@ val dataModule = module {
     single<MusicRepository> {
         MusicRepositoryImpl(
             musicApi = get(),
+            musicDao = get(),
             ioDispatcher = get(named(CoroutineQualifier.IoDispatcher)),
         )
     }

@@ -10,6 +10,7 @@ kt_android_library(
     plugins = [
         "//:jetpack_compose_compiler_plugin",
         "//:serialization_plugin",
+        "//:room_ksp_plugin",
     ],
     visibility = ["//visibility:public"],
     resource_files = glob(["src/main/res/**/*"]),
@@ -41,6 +42,9 @@ kt_android_library(
         artifact("androidx.navigation:navigation-compose"),
         artifact("org.jetbrains.kotlinx:kotlinx-serialization-core"),
         artifact("org.jetbrains.kotlinx:kotlinx-serialization-json"),
+        artifact("androidx.room:room-runtime"),
+        artifact("androidx.room:room-ktx"),
+        artifact("androidx.room:room-compiler"),
     ],
 )
 

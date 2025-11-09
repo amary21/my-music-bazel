@@ -5,6 +5,7 @@ import com.amary.my.music.coroutine.coroutinesModule
 import com.amary.my.music.di.exoPlayerModule
 import com.amary.my.music.di.networkModule
 import com.amary.my.music.di.dataModule
+import com.amary.my.music.di.databaseModule
 import com.amary.my.music.di.domainModule
 import com.amary.my.music.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -20,6 +21,7 @@ class MainApplication: Application() {
             androidContext(this@MainApplication)
             modules(
                 coroutinesModule,
+                databaseModule,
                 networkModule,
                 exoPlayerModule,
                 dataModule,

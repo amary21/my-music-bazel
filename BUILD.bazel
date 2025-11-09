@@ -1,4 +1,4 @@
-load("@rules_kotlin//kotlin:core.bzl", "kt_compiler_plugin")
+load("@rules_kotlin//kotlin:core.bzl", "kt_compiler_plugin", "kt_ksp_plugin")
 load("@rules_jvm_external//:defs.bzl", "artifact")
 
 kt_compiler_plugin(
@@ -18,6 +18,16 @@ kt_compiler_plugin(
     visibility = ["//visibility:public"],
     deps = [
         artifact("org.jetbrains.kotlin:kotlin-serialization-compiler-plugin-embeddable"),
+    ],
+)
+
+kt_ksp_plugin(
+    name = "room_ksp_plugin",
+    processor_class = "androidx.room.RoomProcessor",
+    target_embedded_compiler = True,
+    visibility = ["//visibility:public"],
+    deps = [
+        artifact("androidx.room:room-compiler")
     ],
 )
 

@@ -9,6 +9,17 @@ class MusicUseCase(
     private val dispatcher: CoroutineDispatcher,
 ) {
     suspend fun invoke(query: String) = withContext(dispatcher) {
-        musicRepository.searchMusic(query)
+        try {
+            val resultApi = musicRepository.searchMusic(query)
+            if (resultApi.isNotEmpty()) {
+                musicRepository.insert(resultApi)
+                resultApi
+            } else {
+                throw Exception("No result found")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            musicRepository.getAll()
+        }
     }
 }
