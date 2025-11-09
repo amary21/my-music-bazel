@@ -1,6 +1,7 @@
 load("@rules_android//android:rules.bzl", "android_binary")
 load("@rules_jvm_external//:defs.bzl", "artifact")
 load("@rules_kotlin//kotlin:android.bzl", "kt_android_library")
+load("@rules_kotlin//kotlin:jvm.bzl", "kt_jvm_test")
 
 kt_android_library(
     name = "lib",
@@ -45,6 +46,18 @@ kt_android_library(
         artifact("androidx.room:room-runtime"),
         artifact("androidx.room:room-ktx"),
         artifact("androidx.room:room-compiler"),
+    ],
+)
+
+kt_jvm_test(
+    name = "unit_tests",
+    srcs = glob(["src/test/java/**/*.kt"]),
+    test_class = "com.amary.my.music.MainTest",
+    deps = [
+        ":lib",
+        artifact("junit:junit"),
+        artifact("io.mockk:mockk"),
+        artifact("org.jetbrains.kotlinx:kotlinx-coroutines-test"),
     ],
 )
 
