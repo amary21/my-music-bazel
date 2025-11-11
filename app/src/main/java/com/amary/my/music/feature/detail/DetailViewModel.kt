@@ -2,9 +2,8 @@ package com.amary.my.music.feature.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
-import androidx.media3.exoplayer.ExoPlayer
+import com.amary.my.music.data.exoplayer.MusicPlayer
+import com.amary.my.music.data.exoplayer.PlayerListener
 import com.amary.my.music.domain.model.Result
 import com.amary.my.music.domain.usecase.CurrentMusicUseCase
 import com.amary.my.music.domain.usecase.ListMusicUseCase
@@ -18,11 +17,34 @@ import kotlinx.coroutines.launch
 class DetailViewModel(
     private val listMusicUseCase: ListMusicUseCase,
     private val currentMusicUseCase: CurrentMusicUseCase,
-    private val exoPlayer: ExoPlayer
-): ViewModel() {
+    private val musicPlayer: MusicPlayer
+) : ViewModel() {
+
     private var positionJob: Job? = null
     private val _state = MutableStateFlow(DetailState())
     val state get() = _state.asStateFlow()
+
+    init {
+        setupPlayerListener()
+    }
+
+    private fun setupPlayerListener() {
+        musicPlayer.setListener(object : PlayerListener {
+            override fun onIsPlayingChanged(isPlaying: Boolean) {
+                _state.update {
+                    it.copy(isPlaying = isPlaying)
+                }
+            }
+
+            override fun onPlaybackStateChanged(isReady: Boolean) {
+                if (isReady) {
+                    _state.update {
+                        it.copy(duration = musicPlayer.duration)
+                    }
+                }
+            }
+        })
+    }
 
     fun onEvent(event: DetailEvent) {
         when (event) {
@@ -48,44 +70,25 @@ class DetailViewModel(
             )
         }
 
-        prePare(currentResult)
+        prepare(currentResult)
     }
 
-    private fun prePare(result: Result) {
-        exoPlayer.setMediaItem(MediaItem.fromUri(result.previewUrl))
-        exoPlayer.prepare()
+    private fun prepare(result: Result) {
+        musicPlayer.prepare(result.previewUrl)
 
-        exoPlayer.addListener(object : Player.Listener{
-            override fun onIsPlayingChanged(isPlaying: Boolean) {
-                _state.update {
-                    it.copy(
-                        isPlaying = isPlaying,
-                        selectedSong = result
-                    )
-                }
-            }
-
-            override fun onPlaybackStateChanged(playbackState: Int) {
-                if (playbackState == Player.STATE_READY) {
-                    _state.update {
-                        it.copy(
-                            duration = exoPlayer.duration
-                        )
-                    }
-                }
-            }
-        })
+        _state.update {
+            it.copy(selectedSong = result)
+        }
 
         startPositionUpdate()
     }
 
     private fun startPositionUpdate() {
+        positionJob?.cancel()
         positionJob = viewModelScope.launch {
             while (true) {
                 _state.update {
-                    it.copy(
-                        position = exoPlayer.currentPosition
-                    )
+                    it.copy(position = musicPlayer.currentPosition)
                 }
                 delay(500)
             }
@@ -93,15 +96,15 @@ class DetailViewModel(
     }
 
     private fun playPause() {
-        if (exoPlayer.isPlaying) {
-            exoPlayer.pause()
+        if (musicPlayer.isPlaying) {
+            musicPlayer.pause()
         } else {
-            exoPlayer.play()
+            musicPlayer.play()
         }
     }
 
-    fun seekTo(position: Long) {
-        exoPlayer.seekTo(position)
+    private fun seekTo(position: Long) {
+        musicPlayer.seekTo(position)
     }
 
     private fun next() {
@@ -111,7 +114,7 @@ class DetailViewModel(
 
         if (currentIndex != -1 && currentIndex < results.lastIndex) {
             val nextSong = results[currentIndex + 1]
-            prePare(nextSong)
+            prepare(nextSong)
         }
     }
 
@@ -122,13 +125,12 @@ class DetailViewModel(
 
         if (currentIndex > 0) {
             val prevSong = results[currentIndex - 1]
-            prePare(prevSong)
+            prepare(prevSong)
         }
     }
 
-
     override fun onCleared() {
-        exoPlayer.release()
+        musicPlayer.release()
         positionJob?.cancel()
         super.onCleared()
     }
