@@ -31,6 +31,10 @@ jobs:
           disk-cache: ${{ github.workflow }}
           repository-cache: true
 
+      - name: Unit Tests
+        run: |
+          bazel test //app:unit_tests --test_output=errors
+
       - name: Build APK
         run: |
           bazel build //app:app
