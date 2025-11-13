@@ -27,10 +27,11 @@ jobs:
         uses: bazel-contrib/setup-bazel@0.14.0
         with:
           bazelisk-cache: true
-          bazelisk-version: 1.x
+          bazelisk-version: '1.27.0'
           disk-cache: ${{ github.workflow }}
           repository-cache: true
 
       - name: Build APK
         run: |
-          bazel build //app/src/main:app
+          bazel build //app:app
+
