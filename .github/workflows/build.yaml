@@ -35,3 +35,9 @@ jobs:
         run: |
           bazel build //app:app
 
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-apk
+          path: bazel-bin/app/app.apk
+
